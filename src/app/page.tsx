@@ -1,17 +1,16 @@
 import TodosComponent from "@/Components/TodosComponent/TodosComponent";
-import page from "./page.module.scss";
-import { PrismaClient } from "@prisma/client";
+import page from "./page.module.css";
+import { PrismaClient, Todo } from "@prisma/client";
 
 const db = new PrismaClient();
 
 const Home = async () => {
-	const todos = await db.todolist.findMany();
-	return (
-		<main className={page.content}>
-			<h1>Todos page</h1>
-			<TodosComponent todos={todos} />
-		</main>
-	);
+  const todos: Todo[] = await db.todo.findMany();
+  return (
+    <main className={page.container}>
+      <TodosComponent todos={todos} />
+    </main>
+  );
 };
 
 export default Home;
